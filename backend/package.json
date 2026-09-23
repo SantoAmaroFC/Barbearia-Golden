@@ -6,7 +6,11 @@
     "pg": "^8.23.0"
   },
   "devDependencies": {
-    "@types/node": "^22.20.2",
+    "@types/node": "^22.20.4",
     "typescript": "^7.0.2"
+
+  },
+  "scripts": {
+    "dev" :"tsx watch src/server.ts"
   }
 }
