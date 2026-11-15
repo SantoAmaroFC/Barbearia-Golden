@@ -1,3 +1,4 @@
+import Hero from "./layout/Hero"
 import Navbar from "./layout/Navbar"
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
   return (
     <>
      <Navbar />
+     <Hero />
     </>
   )
 }
