@@ -1,22 +1,26 @@
-import { pool } from "../database/connection";
-import { Barbeiro, CriarBarbeiro } from "../types/barbeiro";
+import { barbeiroRepository } from '../repositories/barbeiro.repository.js'
+import type { CreateBarbeiro, UpdateBarbeiro } from '../types/barbeiro.js'
 
-class BarbeiroService { async getAll(): Promise<Barbeiro[]> {
-    const res = await pool.query<Barbeiro>("SELECT * FROM barbeiros")
-    return res.rows
-} 
+class BarbeiroService {
+    async create(dados: CreateBarbeiro) {
+        return barbeiroRepository.create(dados)
+    }
 
-async create (dados: CriarBarbeiro): Promise<Barbeiro> {
-    const res = await pool.query<Barbeiro>(`INSERT INTO barbeiros ( nome, email, telefone, foto_url descricao, ativo, criado_em, atualizado_em  ) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING`,
-        [dados.nome, dados.email, dados.telefone, dados.foto_url, dados.descricao, dados.ativo, dados.criado_em, dados.atualizado_em])
+    async getAll() {
+        return barbeiroRepository.getAll()
+    }
 
-        const barbeiro = res.rows[0]
+    async getById(id: string) {
+        return barbeiroRepository.getById(id)
+    }
 
-        if(!barbeiro) {
-            throw new Error (
-                "O banco não retornou o barbeiro cadastrado" );
-        }
-        return barbeiro
+    async update(id: string, dados: UpdateBarbeiro) {
+        return barbeiroRepository.update(id, dados)
+    }
+
+    async delete(id: string) {
+        return barbeiroRepository.delete(id)
+    }
 }
-}
+
 export const barbeiroService = new BarbeiroService()

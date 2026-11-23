@@ -1,24 +1,11 @@
-export interface Barbeiro {
-    id: string
-    nome:string
-    email: string
-    telefone: number
-    foto_url: string
-    descricao: string
-    ativo: string
-    criado_em: number
-    atualizado_em: number
-
+export interface CreateBarbeiro {
+    nome: string
+    telefone: string | null
+    especialidade: string | null
+    disponivel: boolean
 }
 
-export interface CriarBarbeiro {
-    nome: string
-    email: string
-    telefone: number
-    foto_url: string
-    descricao: string
-    ativo: string
-    criado_em: number
-    atualizado_em: number
-
+export type UpdateBarbeiro = Partial<CreateBarbeiro>
+export interface Barbeiro extends CreateBarbeiro {
+    id: string
 }
